@@ -1,5 +1,6 @@
 import glob
 import pandas as pd
+from tqdm import tqdm
 from src.avro_to_csv import load_avro, make_records_df
 
 def main():
@@ -12,7 +13,7 @@ def main():
 
     records = []
 
-    for file_path in file_paths:
+    for file_path in tqdm(file_paths, desc="Chargement des données"):
         record_df = make_records_df(load_avro(file_path))
         records.append(record_df)
 
