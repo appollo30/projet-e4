@@ -52,7 +52,7 @@ git checkout votre-prenom
 
 N'OUBLIEZ PAS DE PUSH QUAND VOUS AVEZ FINI DE TRAVAILLER SUR VOTRE BRANCHE.
 
-Quand vous revenez sur votre branche après avoir push, vous pouvez pull les modifications de la branche main avec la commande suivante:
+Quand vous revenez sur le projet après un certain temps, vous pouvez mettre à jour votre branche avec la commande suivante:
 
 ```bash
 git pull origin main
