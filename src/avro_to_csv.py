@@ -15,7 +15,8 @@ import json
 import argparse
 import os
 from typing import Dict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, tzinfo
+import pytz
 from fastavro import reader
 import pandas as pd
 
@@ -60,7 +61,7 @@ def make_records_df(records : Dict,field : str = "accelerometer") -> pd.DataFram
         print(f"Field {field} is unavailable")
         return None
     
-    timestamp_start = datetime.fromtimestamp(records["rawData"][field]["timestampStart"]/1_000_000) # On convertit les milisecondes en secondes
+    timestamp_start = datetime.fromtimestamp(records["rawData"][field]["timestampStart"]/1_000_000, tz=pytz.timezone("Europe/Paris")) # On convertit les milisecondes en secondes
     sampling_period = round(1/records["rawData"][field]["samplingFrequency"],4)
     
     if field == "accelerometer":
