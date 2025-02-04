@@ -52,8 +52,48 @@ git checkout votre-prenom
 
 N'OUBLIEZ PAS DE PUSH QUAND VOUS AVEZ FINI DE TRAVAILLER SUR VOTRE BRANCHE.
 
+S'il y a des problèmes de conflits, zebi on est livrés à nous-même on va devoir se demerder. Au pire juste demandez-moi (leo) et j'essaierai de vous aider.
+
 Quand vous revenez sur le projet après un certain temps, vous pouvez mettre à jour votre branche avec la commande suivante:
 
 ```bash
 git pull origin main
 ```
+
+## Structure du projet
+
+Le projet est divisé en plusieurs parties:
+
+- `data`: les données du projet
+- `src`: le code source du projet
+- `tests_personnels`: les tests personnels de chacun
+
+### DATA
+
+Voir `data/README.md` pour plus d'informations.
+
+### SRC
+
+Le code du projet, hésitez pas à feuilleter ce qu'il y a déjà avant d'essayer de développer quelque chose, ça se trouve quelqu'un a déjà fait ce que vous voulez faire.
+
+Pour télécharger les dépendances du projet, utilisez la commande suivante:
+
+```bash
+pip install -r requirements.txt
+```
+
+Pour lancer le projet, utilisez la commande suivante:
+
+```bash
+python main.py
+```
+
+### Tests personnels
+
+Soyez libres de faire ce que vous voulez dans ce dossier, c'est votre espace de travail personnel. Rien de ce qui est dans ce dossier ne sera push sur le repo.
+
+## Derniers conseils
+
+Hésitez pas à faire des commit à chaque fois que vous avez fini une fonctionnalité plutôt qu'une fois avec uen grosse quantité de taf, ça permet de garder une trace de ce que vous avez fait. Plus vous en faites fréquemment, moins de chances vous avez d'avoir des conflits (et plus ils seront faciles à résoudre).
+
+Si vous avez du mal à vous servir de git, hésitez pas à me demander (leo) je vous aiderai avec plaisir.
