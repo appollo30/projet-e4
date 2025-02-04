@@ -3,6 +3,10 @@ from src.avro_to_csv import load_avro, make_records_df
 import pandas as pd
 
 def main():
+    """
+    Prend toutes les données avro dans le dossier data/input, les charge, les transforme en DataFrame et les concatène.
+    Le DataFrame est ensuite sauvegardé dans data/cleaned/records.csv
+    """
     file_paths = glob.glob("data/input/*.avro")
     
     records = []
