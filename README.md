@@ -10,8 +10,50 @@ Pour cloner le repo, utilisez la commande suivante:
 git clone https://github.com/appollo30/projet-e4.git
 ````
 
-Merci de respecter la structure des branches, et de ne pas push directement sur la branche `main`. Chaque membre du groupe a sa propre branche (exemple `matthieu` `felix` etc.) donc quand vous travaillez, assurez-vous d'être sur votre branche. 
+Vous devrez alors avoir accès au projet.
+
+Ensuite, créez votre propre branche pour travailler sur le projet. C'est ici que vous pourrez faire vos modifications.
 
 ```bash
-git checkout mathieu
+git checkout -b votre-prenom
+```
+
+Pour vérifier que vous êtes bien sur votre branche, utilisez la commande suivante:
+
+```bash
+git branch
+```
+
+Normalement vous devriez voir une astérisque devant votre branche.
+![alt text](image.png)
+
+Vous pouvez alors commencer à travailler sur le projet.
+
+Quand vous avez fini de travailler sur votre branche, vous pouvez ajouter vos modifications avec la commande suivante:
+
+```bash
+git add .
+git commit -m "Ce que j'ai fait comme modifications"
+git checkout main
+git merge votre-prenom
+```
+
+Vous pouvez alors push vos modifications sur le repo avec la commande suivante:
+
+```bash
+git push origin main
+```
+
+N'oubliez pas enfin de retourner sur votre branche avec la commande suivante:
+
+```bash
+git checkout votre-prenom
+```
+
+N'OUBLIEZ PAS DE PUSH QUAND VOUS AVEZ FINI DE TRAVAILLER SUR VOTRE BRANCHE.
+
+Quand vous revenez sur votre branche après avoir push, vous pouvez pull les modifications de la branche main avec la commande suivante:
+
+```bash
+git pull origin main
 ```
