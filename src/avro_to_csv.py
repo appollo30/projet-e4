@@ -6,16 +6,18 @@ pandas
 taper "pip install fastavro pandas"
 
 Utilisation : 
-taper "python avro_to_csv.py chemin/vers/fichier.avro accelerometer" si vous voulez les données d'accéleromètre, sinon
-mettez 'gyroscope', 'eda', 'temperature', 'tags', 'bvp', 'systolicPeaks' ou 'steps' pour les autres options
-Le fichier sera ensuite écrit dans le dossier data/output avec le même nom que le fichier avro mais en csv
+taper "python avro_to_csv.py chemin/vers/fichier.avro accelerometer" si vous voulez les données
+d'accéleromètre, sinonmettez 'gyroscope', 'eda', 'temperature', 'tags', 'bvp', 'systolicPeaks'
+ou 'steps' pour les autres options
+Le fichier sera ensuite écrit dans le dossier data/output avec le même nom que le fichier avro
+mais en csv
 """
 
 import json
 import argparse
 import os
 from typing import Dict
-from datetime import datetime, timedelta, tzinfo
+from datetime import datetime, timedelta
 import pytz
 from fastavro import reader
 import pandas as pd
@@ -60,7 +62,7 @@ def make_records_df(records : Dict,field : str = "accelerometer") -> pd.DataFram
     if field not in records["rawData"].keys():
         print(f"Field {field} is unavailable")
         return None
-    
+
     timestamp_start = datetime.fromtimestamp(records["rawData"][field]["timestampStart"]/1_000_000, tz=pytz.timezone("Europe/Paris")) # On convertit les milisecondes en secondes
     sampling_period = round(1/records["rawData"][field]["samplingFrequency"],4)
     
@@ -79,7 +81,7 @@ def make_records_df(records : Dict,field : str = "accelerometer") -> pd.DataFram
             "time" : [timestamp_start + sampling_period*i for i in range(n)],
             field : records["rawData"][field]["values"]
         }
-    
+
     return pd.DataFrame(result)
 
 def main():
@@ -87,18 +89,18 @@ def main():
     Fonction main qui permet de convertir un fichier avro en csv
     """
     parser = argparse.ArgumentParser(description="Write one file path for your avro file and the field that you want to make a csv for")
-    
+
     parser.add_argument('file_path', type=str, help=".avro file path")
     parser.add_argument('field', type=str, help="The field that you want to use (accelerometer, temperature, ...)")
     args = parser.parse_args()
-    
+
     split_path = args.file_path.split(os.sep)
     split_path[-2] = "output"
     output_path = f"{os.path.splitext(os.sep.join(split_path))[0]}.csv"
-    
+
     records = load_avro(args.file_path)
     records_df = make_records_df(records,args.field)
     records_df.to_csv(output_path,index=False)
-    
+
 if __name__ == "__main__":
     main()
