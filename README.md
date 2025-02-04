@@ -1,6 +1,6 @@
 # README
 
-Voici le repo du projet e4 R7 sur la reconnaissance d'utilisateur de smartwatch. 
+Voici le repo du projet e4 R7 sur la reconnaissance d'utilisateur de smartwatch.
 
 ## Pour commencer
 
