@@ -65,12 +65,13 @@ def make_records_df(records : Dict,field : str = "accelerometer") -> pd.DataFram
     sampling_period = round(1/records["rawData"][field]["samplingFrequency"],4)
     
     if field == "accelerometer":
+        scaling_factor = 9.80665 * records["rawData"][field]["imuParams"]["physicalMax"] / records["rawData"][field]["imuParams"]["digitalMax"] #On convertit l'acceleration en g puis en m/s^2
         n = len(records["rawData"][field]["x"])
         result = {
             "time" : [timestamp_start + timedelta(seconds = sampling_period*i) for i in range(n)],
-            "accel_x" : records["rawData"][field]["x"],
-            "accel_y" : records["rawData"][field]["y"],
-            "accel_z" : records["rawData"][field]["z"]
+            "accel_x" : [elt*scaling_factor for elt in records["rawData"][field]["x"]],
+            "accel_y" : [elt*scaling_factor for elt in records["rawData"][field]["y"]],
+            "accel_z" : [elt*scaling_factor for elt in records["rawData"][field]["z"]]
         }
     else:
         n = len(records["rawData"][field]["values"])
