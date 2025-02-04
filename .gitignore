@@ -1,3 +1,5 @@
 tests_personnels
 
 data/output/*
+
+__pycache__
