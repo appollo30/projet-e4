@@ -14,7 +14,8 @@ Le fichier sera ensuite écrit dans le dossier data/output avec le même nom que
 import json
 import argparse
 import os
-from typing import List, Dict
+from typing import Dict
+from datetime import datetime, timedelta
 from fastavro import reader
 import pandas as pd
 
@@ -59,13 +60,13 @@ def make_records_df(records : Dict,field : str = "accelerometer") -> pd.DataFram
         print(f"Field {field} is unavailable")
         return None
     
-    timestamp_start = records["rawData"][field]["timestampStart"]
+    timestamp_start = datetime.fromtimestamp(records["rawData"][field]["timestampStart"]/1_000_000) # On convertit les milisecondes en secondes
     sampling_period = round(1/records["rawData"][field]["samplingFrequency"],4)
     
     if field == "accelerometer":
         n = len(records["rawData"][field]["x"])
         result = {
-            "time" : [timestamp_start + sampling_period*i for i in range(n)],
+            "time" : [timestamp_start + timedelta(seconds = sampling_period*i) for i in range(n)],
             "accel_x" : records["rawData"][field]["x"],
             "accel_y" : records["rawData"][field]["y"],
             "accel_z" : records["rawData"][field]["z"]
