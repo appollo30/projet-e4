@@ -82,7 +82,6 @@ def make_records_df(records : Dict,field : str = "accelerometer") -> pd.DataFram
 def main():
     """
     Fonction main qui permet de convertir un fichier avro en csv
-    
     """
     parser = argparse.ArgumentParser(description="Write one file path for your avro file and the field that you want to make a csv for")
     
